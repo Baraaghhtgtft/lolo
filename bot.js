@@ -1,33 +1,14 @@
-const Discord = require('discord.js');
-const client = new Discord.Client();
-client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}!`);
-});
+const gamestats = [`باليز`,`لا`,`باليز`,`لا`,`باليز`,`K`]
+var index = 0
+var timer = 10 // الوقت بالثواني لتغير الستريمنق
+client.on("ready", ()=> {
+        setInterval(function(){
+        client.user.setGame(`${gamestats[index]}`,'https://www.twitch.tv/ToxicCodes') 
+        index++
+            if( index >= gamestats.length) index = 0 ;
+        }, timer*1000);
 
-
-const developers = ["419317864005238785"]
-const adminprefix = "^";
-client.on('message', message => {
-    var argresult = message.content.split(` `).slice(1).join(' ');
-      if (!developers.includes(message.author.id)) return;
-      
-  if (message.content.startsWith(adminprefix + 'setp')) {
-    client.user.setGame(argresult);
-      message.channel.send(`**Status You   ${argresult}**`)
-  } else 
-  if (message.content.startsWith(adminprefix + 'setw')) {
-  client.user.setActivity(argresult, {type:'WATCHING'});
-      message.channel.send(`**Status You   ${argresult}**`)
-  } else 
-  if (message.content.startsWith(adminprefix + 'setl')) {
-  client.user.setActivity(argresult , {type:'LISTENING'});
-      message.channel.send(`**Status You  ${argresult}**`)
-  } else 
-  if (message.content.startsWith(adminprefix + 'sets')) {
-    client.user.setGame(argresult, "https://www.twitch.tv/M3roof");
-      message.channel.send(`**Status You ${argresult} **`)
-}
-});
+}); 
 
 
 
